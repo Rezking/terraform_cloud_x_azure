@@ -10,9 +10,16 @@ terraform {
 }
 
 provider "azurerm" {
-  features {}
-  client_id = var.clientId
-  client_secret = var.clientSecret
+  features {
+    virtual_machine {
+      delete_os_disk_on_deletion     = true
+      graceful_shutdown              = false
+      skip_shutdown_and_force_delete = false
+    }
+  }
+
+  client_id       = var.clientId
+  client_secret   = var.clientSecret
   subscription_id = var.subscriptionId
-  tenant_id = var.tenantId
+  tenant_id       = var.tenantId
 }
