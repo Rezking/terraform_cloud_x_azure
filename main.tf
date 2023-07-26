@@ -27,7 +27,7 @@ resource "azurerm_network_interface" "Ore_nic" {
   resource_group_name = azurerm_resource_group.rg.name
 
   ip_configuration {
-    name                          = "rez"
+    name                          = "rezking"
     subnet_id                     = azurerm_subnet.Ore_subnet.id
     private_ip_address_allocation = "Dynamic"
   }

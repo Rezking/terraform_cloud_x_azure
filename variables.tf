@@ -48,7 +48,7 @@ variable "vm_name" {
 }
 
 variable "nic_name" {
-    default = "nic_Ore"
+    default = "nic_ore"
 }
 
 variable "username" {
