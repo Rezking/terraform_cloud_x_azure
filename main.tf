@@ -37,14 +37,14 @@ resource "azurerm_linux_virtual_machine" "vm_resource" {
   name                = var.vm_name
   resource_group_name = azurerm_resource_group.rg.name
   location            = var.location
-  admin_username      = var.username ? "azureuser" : var.username
+  admin_username      = var.username
   network_interface_ids = [
     azurerm_network_interface.Ore_nic.id
   ]
 
   size = "Standard_B1s"
   admin_ssh_key {
-    username   = "azureuser"
+    username   = var.username
     public_key = data.azurerm_ssh_public_key.vm_key
   }
 
@@ -56,7 +56,7 @@ resource "azurerm_linux_virtual_machine" "vm_resource" {
   source_image_reference {
     publisher = "Canonical"
     offer     = "0001-com-ubuntu-server-focal"
-    sku       = "20_04-lts"
+    sku       = "22_04-lts"
     version   = "latest"
   }
 }

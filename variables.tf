@@ -50,3 +50,7 @@ variable "vm_name" {
 variable "nic_name" {
     default = "nic_Ore"
 }
+
+variable "username" {
+    default = "azureuser"
+}
