@@ -7,7 +7,7 @@ variable "rg_name" {
 variable "location" {
   type        = string
   description = "The location of the resource group"
-  default     = "westus2"
+  default     = "westus3"
 }
 
 variable "clientId" {
