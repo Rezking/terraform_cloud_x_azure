@@ -44,7 +44,7 @@ variable "subnet_addr" {
 }
 
 variable "vm_name" {
-  default = "vm_with_terraform"
+  default = "vmXterraform"
 }
 
 variable "nic_name" {
