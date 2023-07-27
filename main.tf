@@ -14,7 +14,7 @@ resource "azurerm_virtual_network" "VNet" {
   address_space       = var.vnet_address
 }
 
-resource "azurerm_subnet" "ore_subnet" {
+resource "azurerm_subnet" "Ore_subnet" {
   name                 = var.subnet_name
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.VNet.name
@@ -31,7 +31,7 @@ resource "azurerm_public_ip" "nic_ip" {
     create_before_destroy = true
   }
 }
-resource "azurerm_network_interface" "ore_nic" {
+resource "azurerm_network_interface" "Ore_nic" {
   count               = 2
   name                = "${var.nic_name}${count.index}"
   location            = azurerm_resource_group.rg.location
@@ -39,7 +39,7 @@ resource "azurerm_network_interface" "ore_nic" {
 
   ip_configuration {
     name                          = "rezking"
-    subnet_id                     = azurerm_subnet.ore_subnet.id
+    subnet_id                     = azurerm_subnet.Ore_subnet.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.nic_ip[count.index].id
   }
@@ -52,7 +52,7 @@ resource "azurerm_linux_virtual_machine" "vm_resource" {
   location            = var.location
   admin_username      = "${var.username}${count.index}"
   network_interface_ids = [
-    azurerm_network_interface.ore_nic[count.index].id
+    azurerm_network_interface.Ore_nic[count.index].id
   ]
 
   size = "Standard_B1s"
