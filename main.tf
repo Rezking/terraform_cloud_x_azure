@@ -73,6 +73,7 @@ resource "azurerm_linux_virtual_machine" "vm_resource" {
 }
 
 output "vm_public_ip" {
+  count = 2
   description = "The public ip address of the virtual machine created"
   value       = azurerm_linux_virtual_machine.vm_resource[count.index].public_ip_address
 }
