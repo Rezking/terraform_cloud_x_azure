@@ -44,7 +44,7 @@ resource "azurerm_network_interface" "Ore_nic" {
 }
 
 resource "azurerm_linux_virtual_machine" "vm_resource" {
-  count = 2
+  count               = 2
   name                = "${var.vm_name}${count.index}"
   resource_group_name = azurerm_resource_group.rg.name
   location            = var.location
@@ -70,9 +70,9 @@ resource "azurerm_linux_virtual_machine" "vm_resource" {
     sku       = "20_04-lts"
     version   = "latest"
   }
-}
 
-# output "vm_public_ip" {
-#   description = "The public ip address of the virtual machine created"
-#   value       = azurerm_linux_virtual_machine.vm_resource.public_ip_address
-# }
+  output "vm_public_ip" {
+    description = "The public ip address of the virtual machine created"
+    value       = azurerm_linux_virtual_machine.vm_resource[count.index].public_ip_address
+  }
+}
