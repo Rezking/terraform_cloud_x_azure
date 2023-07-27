@@ -21,6 +21,15 @@ resource "azurerm_subnet" "Ore_subnet" {
   address_prefixes     = var.subnet_addr
 }
 
+resource "azurerm_public_ip" "nic_ip" {
+    name = "ip_ore"
+    resource_group_name = azurerm_resource_group.rg.name
+    location = var.location
+    allocation_method = "Dynamic"
+    lifecycle {
+      create_before_destroy = true
+    }
+}
 resource "azurerm_network_interface" "Ore_nic" {
   name                = var.nic_name
   location            = azurerm_resource_group.rg.location
@@ -30,6 +39,7 @@ resource "azurerm_network_interface" "Ore_nic" {
     name                          = "rezking"
     subnet_id                     = azurerm_subnet.Ore_subnet.id
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id = azurerm_public_ip.nic_ip.id
   }
 }
 
