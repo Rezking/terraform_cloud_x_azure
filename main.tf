@@ -70,3 +70,8 @@ resource "azurerm_linux_virtual_machine" "vm_resource" {
     version   = "latest"
   }
 }
+
+output "vm_public ip" {
+    description = "The public ip address of the virtual machine created"
+    value = azurerm_linux_virtual_machine.vm_resource.public_ip_address
+}
