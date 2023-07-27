@@ -4,8 +4,8 @@ resource "azurerm_resource_group" "rg" {
 }
 
 data "azurerm_ssh_public_key" "vm_key" {
-  name                = "vm_key"
-  resource_group_name = var.rg_name
+  name                = "vm_key1"
+  resource_group_name = var.key_rg
 }
 resource "azurerm_virtual_network" "VNet" {
   name                = var.vnet_name

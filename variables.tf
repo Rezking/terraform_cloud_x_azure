@@ -54,3 +54,8 @@ variable "nic_name" {
 variable "username" {
     default = "azureuser"
 }
+
+variable "key_rg" {
+    type = string
+    default = "rez"
+}
