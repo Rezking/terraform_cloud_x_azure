@@ -48,14 +48,14 @@ variable "vm_name" {
 }
 
 variable "nic_name" {
-    default = "nic_ore"
+  default = "nic_ore"
 }
 
 variable "username" {
-    default = "azureuser"
+  default = "azureuser"
 }
 
 variable "key_rg" {
-    type = string
-    default = "rez"
+  type    = string
+  default = "rez"
 }

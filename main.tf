@@ -22,13 +22,13 @@ resource "azurerm_subnet" "Ore_subnet" {
 }
 
 resource "azurerm_public_ip" "nic_ip" {
-    name = "ip_ore"
-    resource_group_name = azurerm_resource_group.rg.name
-    location = var.location
-    allocation_method = "Dynamic"
-    lifecycle {
-      create_before_destroy = true
-    }
+  name                = "ip_ore"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = var.location
+  allocation_method   = "Dynamic"
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 resource "azurerm_network_interface" "Ore_nic" {
   name                = var.nic_name
@@ -39,7 +39,7 @@ resource "azurerm_network_interface" "Ore_nic" {
     name                          = "rezking"
     subnet_id                     = azurerm_subnet.Ore_subnet.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id = azurerm_public_ip.nic_ip.id
+    public_ip_address_id          = azurerm_public_ip.nic_ip.id
   }
 }
 
@@ -71,7 +71,7 @@ resource "azurerm_linux_virtual_machine" "vm_resource" {
   }
 }
 
-output "vm_public ip" {
-    description = "The public ip address of the virtual machine created"
-    value = azurerm_linux_virtual_machine.vm_resource.public_ip_address
+output "vm_public_ip" {
+  description = "The public ip address of the virtual machine created"
+  value       = azurerm_linux_virtual_machine.vm_resource.public_ip_address
 }
