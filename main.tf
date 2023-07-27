@@ -45,7 +45,7 @@ resource "azurerm_network_interface" "Ore_nic" {
 
 resource "azurerm_linux_virtual_machine" "vm_resource" {
   count = 2
-  name                = count > 1 ? "${var.vm_name}${count.index}" : var.vm_name
+  name                = "${var.vm_name}${count.index}"
   resource_group_name = azurerm_resource_group.rg.name
   location            = var.location
   admin_username      = "${var.username}${count.index}"
