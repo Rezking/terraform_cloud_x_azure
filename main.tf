@@ -50,14 +50,14 @@ resource "azurerm_linux_virtual_machine" "vm_resource" {
   name                = "${var.vm_name}${count.index}"
   resource_group_name = azurerm_resource_group.rg.name
   location            = var.location
-  admin_username      = "${var.username}${count.index}"
+  admin_username      = var.username
   network_interface_ids = [
     azurerm_network_interface.Ore_nic[count.index].id
   ]
 
   size = "Standard_B1s"
   admin_ssh_key {
-    username   = "${var.username}${count.index}"
+    username   = var.username
     public_key = data.azurerm_ssh_public_key.vm_key.public_key
   }
 
