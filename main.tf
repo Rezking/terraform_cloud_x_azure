@@ -14,7 +14,7 @@ resource "azurerm_virtual_network" "VNet" {
   address_space       = var.vnet_address
 }
 
-resource "azurerm_subnet" "Ore_subnet" {
+resource "azurerm_subnet" "ore_subnet" {
   name                 = var.subnet_name
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.VNet.name
@@ -22,7 +22,8 @@ resource "azurerm_subnet" "Ore_subnet" {
 }
 
 resource "azurerm_public_ip" "nic_ip" {
-  name                = "ip_ore"
+  count               = 2
+  name                = "ip_ore${count.index}"
   resource_group_name = azurerm_resource_group.rg.name
   location            = var.location
   allocation_method   = "Dynamic"
@@ -30,16 +31,17 @@ resource "azurerm_public_ip" "nic_ip" {
     create_before_destroy = true
   }
 }
-resource "azurerm_network_interface" "Ore_nic" {
-  name                = var.nic_name
+resource "azurerm_network_interface" "ore_nic" {
+  count               = 2
+  name                = "${var.nic_name}${count.index}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 
   ip_configuration {
     name                          = "rezking"
-    subnet_id                     = azurerm_subnet.Ore_subnet.id
+    subnet_id                     = azurerm_subnet.ore_subnet.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.nic_ip.id
+    public_ip_address_id          = azurerm_public_ip.nic_ip[count.index].id
   }
 }
 
@@ -50,7 +52,7 @@ resource "azurerm_linux_virtual_machine" "vm_resource" {
   location            = var.location
   admin_username      = "${var.username}${count.index}"
   network_interface_ids = [
-    azurerm_network_interface.Ore_nic.id
+    azurerm_network_interface.ore_nic[count.index].id
   ]
 
   size = "Standard_B1s"
@@ -73,6 +75,6 @@ resource "azurerm_linux_virtual_machine" "vm_resource" {
 }
 
 output "vm_public_ip" {
-    description = "The public ip address of the virtual machine created"
-    value       = ["${azurerm_linux_virtual_machine.vm_resource.*.public_ip_address}"]
-  }
+  description = "The public ip address of the virtual machine created"
+  value       = ["${azurerm_linux_virtual_machine.vm_resource.*.public_ip_address}"]
+}
