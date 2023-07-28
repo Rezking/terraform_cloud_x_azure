@@ -59,3 +59,6 @@ variable "key_rg" {
   type    = string
   default = "rez"
 }
+
+variable "resource_no" {
+}
