@@ -19,6 +19,13 @@ data "template_file" "allowed_locations_rule" {
     }
 }
 
+resource "azurerm_policy_assignment" "assignment" {
+  name                 = "allowed_location_assignment"
+  display_name         = "Assignment for locations"
+  policy_definition_id = azurerm_policy_definition.allowed_locations.id
+  scope = "/subscriptions/${var.subscriptionId}/resourceGroups/${var.rg_name}"
+}
+
 output "policy_rule_generated" {
     value = data.template_file.allowed_locations_rule.rendered
 }
