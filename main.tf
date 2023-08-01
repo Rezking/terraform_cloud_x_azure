@@ -8,6 +8,7 @@ data "azurerm_ssh_public_key" "vm_key" {
   resource_group_name = var.key_rg
 }
 resource "azurerm_virtual_network" "VNet" {
+  count = var.resource_no == 0 ? 0 : 1
   name                = var.vnet_name
   resource_group_name = azurerm_resource_group.rg.name
   location            = var.location
@@ -15,6 +16,7 @@ resource "azurerm_virtual_network" "VNet" {
 }
 
 resource "azurerm_subnet" "Ore_subnet" {
+  count = var.resource_no == 0 ? 0 : 1
   name                 = var.subnet_name
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.VNet.name
