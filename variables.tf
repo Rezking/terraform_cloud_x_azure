@@ -62,3 +62,9 @@ variable "key_rg" {
 
 variable "resource_no" {
 }
+
+variable "allowed_locations" {
+  type        = list(string)
+  description = "list of allowed locations"
+  default     = ["westus3", "eastus2"]
+}

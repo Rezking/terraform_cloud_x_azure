@@ -22,7 +22,7 @@ resource "azurerm_subnet" "Ore_subnet" {
 }
 
 resource "azurerm_public_ip" "nic_ip" {
-  count               = 2
+  count               = var.resource_no
   name                = "ip_ore${count.index}"
   resource_group_name = azurerm_resource_group.rg.name
   location            = var.location
