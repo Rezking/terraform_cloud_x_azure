@@ -1,4 +1,4 @@
-resource "azurem_policy_definition" "allowed_locations" {
+resource "azurerm_policy_definition" "allowed_locations" {
     name = "allowed-locations-policy"
     display_name = "Allowed Locations Policy"
     description = "This policy enforces a location for resource"
