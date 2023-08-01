@@ -64,7 +64,7 @@ variable "resource_no" {
 }
 
 variable "allowed_locations" {
-  type = list(string)
+  type        = list(string)
   description = "list of allowed locations"
-  default = ["westus3", "eastus2"]
+  default     = ["westus3", "eastus2"]
 }
