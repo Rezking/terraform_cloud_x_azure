@@ -5,7 +5,7 @@ resource "azurerm_network_security_group" "rez_nsg" {
 }
 
 resource "azurerm_network_security_rule" "rez_nsg" {
-  name                        = "Allow SSH"
+  name                        = "allow_SSH"
   priority                    = 100
   direction                   = "Inbound"
   access                      = "Allow"
