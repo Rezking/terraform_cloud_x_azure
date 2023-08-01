@@ -22,7 +22,7 @@ data "template_file" "allowed_locations_rule" {
 
 resource "azurerm_resource_group_policy_assignment" "assignment" {
   name                 = "allowed_location_assignment"
-  resource_group_id    = var.azurerm_resource_group.rg.id
+  resource_group_id    = azurerm_resource_group.rg.id
   policy_definition_id = azurerm_policy_definition.allowed_locations.id
 }
 
